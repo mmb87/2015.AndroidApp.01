@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/newsEntry1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/loading"
+        android:minHeight="0.5in" />
+
+    <TextView
+        android:id="@+id/newsEntry2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="0.5in" />
+
+    <TextView
+        android:id="@+id/newsEntry3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="0.5in" />
+
+    <TextView
+        android:id="@+id/newsEntry4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="0.5in" />
+
+    <TextView
+        android:id="@+id/newsEntry5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="0.5in" />
+</LinearLayout>
