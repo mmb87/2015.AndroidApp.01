@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">OpenIT-Project-2015.1</string>
     <string name="hello_world">Hello world!</string>
+    <string name="loading">Loading, please wait...</string>
     <string name="action_settings">Settings</string>
 </resources>

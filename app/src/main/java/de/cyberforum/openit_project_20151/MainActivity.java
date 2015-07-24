@@ -1,17 +1,55 @@
 package de.cyberforum.openit_project_20151;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 
-public class MainActivity extends ActionBarActivity {
+import de.cyberforum.openit_project_20151.NewsImplementation.FetchMode;
+import de.cyberforum.openit_project_20151.NewsInterface.FetchError0;
+import de.cyberforum.openit_project_20151.NewsInterface.NewsAction0;
+import de.cyberforum.openit_project_20151.NewsInterface.NewsItemRead0;
+import de.cyberforum.openit_project_20151.NewsInterface.NewsUIAction0;
+import de.cyberforum.openit_project_20151.NewsInterface.NewsUIReaction0;
+
+import de.cyberforum.openit_project_20151.NewsImplementation.NewsUI;
+
+
+public class MainActivity extends ActionBarActivity implements NewsUIReaction0 {
+
+    protected NewsUI newsUI;
+
+    public void update(FetchMode fetchMode, ArrayList<NewsItemRead0> news) {
+
+    }
+
+    public void displayError(FetchError0 fetchError) {
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) throws ClassCastException {
         super.onCreate(savedInstanceState);
+        newsUI = new NewsUI(this);
+
         setContentView(R.layout.activity_main);
+
+        FragmentTop5 fragmentTop5 = new FragmentTop5();
+        fragmentTop5.setActivity(this);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.main_fragment, fragmentTop5);
+        ft.commit();
+
+        NewsUIAction0 newsUIAction = (NewsUIAction0)newsUI;
+        newsUIAction.activityChangeFragment(FetchMode.FM_TOP, fragmentTop5);
+
+        NewsAction0 newsAction = (NewsAction0)newsUI;
+        newsAction.get(FetchMode.FM_TOP, 5, 0);
     }
 
 
