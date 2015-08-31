@@ -7,6 +7,7 @@ import de.cyberforum.openit_project_20151.NewsInterface.NewsAction0;
 import de.cyberforum.openit_project_20151.NewsInterface.NewsFetchAction0;
 import de.cyberforum.openit_project_20151.NewsInterface.NewsFetchReaction0;
 import de.cyberforum.openit_project_20151.NewsInterface.NewsItemRead0;
+import de.cyberforum.openit_project_20151.NewsInterface.NewsItemStatus0;
 import de.cyberforum.openit_project_20151.NewsInterface.NewsUIReaction0;
 
 /**
@@ -27,8 +28,14 @@ public class NewsFactory implements NewsAction0, NewsFetchReaction0 {
     }
 
     public ArrayList<NewsItemRead0> get(FetchMode fetchMode, Integer itemCount, Integer itemOffset) {
+
         // read from cache
         ArrayList<NewsItemRead0> cachedData = null;
+        ArrayList<NewsItemStatus0> cachedDataStatus = null;
+        if(newsCache.getCount()>0){
+            cachedDataStatus = newsCache.getIds(fetchMode, newsCache.getCount(), null); //I do not know what ItemOffset means
+            cachedData = newsCache.getItems(cachedDataStatus);
+        }
 
         // initiate fetch
         newsFetchAction.initiateFetch(fetchMode);
@@ -38,7 +45,7 @@ public class NewsFactory implements NewsAction0, NewsFetchReaction0 {
 
     public void fetchResult(FetchMode fetchmode, ArrayList<NewsItemRead0> newsList) {
         // store in cache
-
+        newsCache.store(newsList);
         // send update to UI
         newsUIReaction.update(fetchmode, newsList);
     }
